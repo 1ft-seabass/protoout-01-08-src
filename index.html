@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Index</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+
+  <h1>Vue Sample Page for ProtoOut Studio</h1>
+
+  <div id="app-index-list">
+    <ol>
+      <li v-for="todo in todos">
+        <a v-bind:href="todo.url">{{ todo.text }}</a>
+      </li>
+    </ol>
+  </div>
+
+  <script>
+    var app4 = new Vue({
+      el: '#app-index-list',
+      data: {
+        todos: [
+          { url:'step-01/index.html', text: 'Step 01' },
+          { url:'step-02/index.html', text: 'Step 02' },
+          { url:'step-03/index.html', text: 'Step 03' }
+        ]
+      }
+    })
+  </script>
+</body>
+
+</html>

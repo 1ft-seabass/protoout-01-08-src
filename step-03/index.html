@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Step 03</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <h1>Step 03</h1>
+    
+  <div id="app-3">
+    <span v-if="seen">Now you see me</span>
+  </div>
+  
+  <script>
+    var app3 = new Vue({
+      el: '#app-3',
+      data: {
+        seen: true
+      }
+    })
+  </script>
+</body>
+</html>
