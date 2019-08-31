@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Step 08</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+  <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Step 08</h1>
+    
+    
+    <div id='example-1'>
+        <form>
+          <input v-model="message" placeholder="edit me">
+          <p>Message is: {{ message }}</p>
+        </form>
+    </div>
+  
+    <div id='example-3' class="row">
+        <div class="column">
+          <input type="checkbox" id="jack" value="Jack" v-model="checkedNames"> Jack
+        </div>
+        <div class="column">
+          <input type="checkbox" id="john" value="John" v-model="checkedNames"> Jack
+        </div>
+        <div class="column">
+          <input type="checkbox" id="mike" value="Mike" v-model="checkedNames"> Jack
+        </div>
+        <div class="column"><span>Checked names: {{ checkedNames }}</span></div>
+    </div>
+
+  </div>
+
+  
+  <script>
+    new Vue({
+      el: '#example-1',
+      data: {
+        message: ''
+      }
+    })
+
+    new Vue({
+      el: '#example-3',
+      data: {
+        checkedNames: []
+      }
+    })
+  </script>
+</body>
+</html>
