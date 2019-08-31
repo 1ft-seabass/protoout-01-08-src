@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Step Firebase</title>
+  <!--Milligram -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
+  <!-- Vue -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <div class="container">
+    
+    <h1>Step Firebase</h1>
+      
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+
+  </div>
+
+  <script>
+    // Your web app's Firebase configuration
+    // Firebase を JavaScript プロジェクトに追加する  |  Firebase
+    // https://firebase.google.com/docs/web/setup?hl=ja
+    // https://support.google.com/firebase/answer/7015592?hl=ja
+
+    var firebaseConfig = {
+      apiKey: "api-key",
+      authDomain: "project-id.firebaseapp.com",
+      databaseURL: "https://project-id.firebaseio.com",
+      projectId: "project-id",
+      storageBucket: "project-id.appspot.com",
+      messagingSenderId: "sender-id",
+    };
+    
+    // Initialize Firebase
+    var myproject = firebase.initializeApp(firebaseConfig);
+
+    var database = myproject.database();
+
+    // 初期のFirebaseの値を決める
+    var todos = [
+          { text: 'Learn JavaScript' },
+          { text: 'Learn Vue' },
+          { text: 'Build something awesome' }
+        ];
+
+    this.todosRef = this.database.ref('todos');
+    this.todosRef.set(todos);
+    var _this = this;
+    var app4 = new Vue({
+      el: '#app-4',
+      data: function () {
+        return {
+          todos: todos
+        }
+      }
+    });
+
+
+    // Firebase Realtime Database 側からの変更反映
+    // Firebaseコンソール側から変更してみよう
+    this.todosRef.on('value', function(snapshot) {
+      _this.todos = snapshot.val();
+      console.log("todos Changed ------------");
+      console.log(_this.todos);
+      _this.app4.todos = _this.todos;
+    });
+
+    // 定期的に値を変える
+    // todos 0 番目をランダム
+    // _this.todos は、Firebaseを変更したものを常に記録して
+    // このJS内部で保持してる値なので、割り込んで編集してもずっと引き回される
+    setInterval(
+      function(){
+        _this.todos[0] = { text:"Member : " + Math.floor( Math.random() * 1000 ) }
+        _this.todosRef.set(_this.todos);
+      },
+      1000
+    );
+
+  </script>
+</body>
+</html>
